@@ -101,4 +101,24 @@ function main() {
       // Update platforms
       for (let i = 0; i < platforms.length; i++) {
         platforms[i][1] += 5;
-        if (platforms[i][1
+        if (platforms[i][1] > screen_height) {
+          platforms[i][0] = Math.floor(Math.random() * (screen_width - 60));
+          platforms[i][1] = 0;
+        }
+      }
+
+      draw_game();
+    }
+
+    if (keys["r"] && game_over) {
+      game_over = false;
+      player_position = [180, screen_height - 50];
+      platforms = Array.from({ length: 10 }, () => [
+        Math.floor(Math.random() * (screen_width - 60)),
+        Math.floor(Math.random() * (screen_height - 20)),
+      ]);
+    }
+  }, 1000 / 30);
+}
+
+main();
